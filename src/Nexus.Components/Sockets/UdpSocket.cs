@@ -2,7 +2,7 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 
-namespace Nexus.Sockets
+namespace Nexus.Components
 {
     /// <summary>
     /// Creates a new UdpSocket used for UDP communication under IPv4.
@@ -17,18 +17,21 @@ namespace Nexus.Sockets
         /// <inheritdoc cref="NetSocket.LowSocket"/>
         protected override Socket LowSocket { get; set; }
 
-        /// <inheritdoc cref="NetSocket.Available"/>
-        protected override int Available => LowSocket.Available;
+        /// <summary>
+        /// Returns true if the socket has a packet waiting to be handled.
+        /// </summary>
+        public bool PacketAvailable => LowSocket.Available > 0;
 
         /// <inheritdoc cref="NetSocket.Bind"/> 
         public override void Bind(EndPoint endpoint)
         {
             LowSocket.Bind(endpoint);
         }
-
+        
         /// <inheritdoc cref="NetSocket.ReceiveFrom"/>
         public override int ReceiveFrom(byte[] buffer, int offset, int size, ref EndPoint sender)
         {
+            // TODO: Implement packet protocol verification and sanity checks.
             return LowSocket.ReceiveFrom(buffer, offset, size, SocketFlags.None, ref sender);
         }
 

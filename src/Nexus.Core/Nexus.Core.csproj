@@ -1,7 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
         <TargetFramework>netstandard2.0</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+        <None Remove="*.meta" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Nexus.Components\Nexus.Components.csproj" />
+    </ItemGroup>
 </Project>

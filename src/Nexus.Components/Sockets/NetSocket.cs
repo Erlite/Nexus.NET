@@ -2,7 +2,7 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 
-namespace Nexus.Sockets
+namespace Nexus.Components
 {
     /// <summary>
     /// Base class for network sockets used by Nexus.
@@ -13,11 +13,6 @@ namespace Nexus.Sockets
         /// The low-level underlying socket for this NetSocket.
         /// </summary>
         protected abstract Socket LowSocket { get; set; }
-
-        /// <summary>
-        /// The amount of data available to read from this socket.
-        /// </summary>
-        protected abstract int Available { get; }
         
         /// <summary>
         /// Bind this socket to an endpoint.
@@ -27,7 +22,7 @@ namespace Nexus.Sockets
         public abstract void Bind(EndPoint endpoint);
         
         /// <summary>
-        /// Receive a packet
+        /// Receive a packet, stores the data into the buffer and the sender by reference.
         /// </summary>
         /// <param name="buffer"> The buffer to which the data will be passed if any. </param>
         /// <param name="offset"> The offset from which to read the packet into the buffer. </param>
